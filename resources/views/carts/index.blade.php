@@ -25,7 +25,7 @@
                                     <span>Total : Rp {{ number_format($cart->total,0 ,0, ',')}}</span>
                                     <div class="d-flex">
                                         <a href="{{ route('carts.edit', $cart->id) }}" class="material-icons mr-2 text-decoration-none" style="font-size: 20px;">edit</a>
-                                        <span class="material-icons" style="font-size: 20px;">remove_circle</span>
+                                        <span class="material-icons text-danger" style="font-size: 20px;">remove_circle</span>
                                     </div>
                                 </div>
                             </div>
