@@ -33,7 +33,7 @@
                                             <td>{{ $product->name }}</td>
                                             <td>{{ $product->description }}</td>
                                             <td>{{ number_format($product->price, 0, 0, ',') }}</td>
-                                            <td class="text-center">
+                                            <td class="d-flex text-center">
                                                 <a href="{{ route('products.edit', $product->id) }}"
                                                     class="material-icons text-decoration-none"
                                                     style="font-size: 20px;">mode_edit</a>
@@ -41,7 +41,7 @@
                                                     method="post">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button class="btn material-icons text-decoration-none">delete</button>
+                                                    <button class="material-icons text-danger text-decoration-none" style="font-size: 20px; border: none;">delete</button>
                                                 </form>
                                             </td>
                                         </tr>
