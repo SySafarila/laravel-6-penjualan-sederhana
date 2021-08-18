@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Auth;
 
 class CartsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -65,7 +69,10 @@ class CartsController extends Controller
      */
     public function show(Cart $cart)
     {
-        return $cart;
+        if ($cart->user_id == Auth::user()->id) {
+            return $cart;
+        }
+        return redirect()->route('root');
     }
 
     /**
@@ -76,7 +83,10 @@ class CartsController extends Controller
      */
     public function edit(Cart $cart)
     {
-        return view('carts.edit', compact('cart'));
+        if ($cart->user_id == Auth::user()->id) {
+            return view('carts.edit', compact('cart'));
+        }
+        return redirect()->route('root');
     }
 
     /**
@@ -88,16 +98,18 @@ class CartsController extends Controller
      */
     public function update(Request $request, Cart $cart)
     {
-        // return $cart;
-        $product = Product::find($cart->product_id);
+        if ($cart->user_id == Auth::user()->id) {
+            $product = Product::find($cart->product_id);
 
-        $cart->update([
-            'quantity' => $request->quantity,
-            'price' => $product->price,
-            'total' => $product->price * $request->quantity
-        ]);
+            $cart->update([
+                'quantity' => $request->quantity,
+                'price' => $product->price,
+                'total' => $product->price * $request->quantity
+            ]);
 
-        return redirect()->route('carts.index')->with('status', 'Cart updated !');
+            return redirect()->route('carts.index')->with('status', 'Cart updated !');
+        }
+        return redirect()->route('root');
     }
 
     /**
@@ -106,8 +118,10 @@ class CartsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Cart $cart)
     {
-        //
+        if ($cart->user_id == Auth::user()->id) {
+            $cart->delete();
+        }
     }
 }
