@@ -21,7 +21,13 @@
                                     <span>Price : Rp {{ number_format($cart->price,0 ,0, ',')}}</span>
                                     <span>Quantity : {{ $cart->quantity }}</span>
                                 </div>
-                                <span>Total : Rp {{ number_format($cart->total,0 ,0, ',')}}</span>
+                                <div class="d-flex justify-content-between">
+                                    <span>Total : Rp {{ number_format($cart->total,0 ,0, ',')}}</span>
+                                    <div class="d-flex">
+                                        <a href="{{ route('carts.edit', $cart->id) }}" class="material-icons mr-2 text-decoration-none" style="font-size: 20px;">edit</a>
+                                        <span class="material-icons" style="font-size: 20px;">remove_circle</span>
+                                    </div>
+                                </div>
                             </div>
                             <hr>
                         @endforeach

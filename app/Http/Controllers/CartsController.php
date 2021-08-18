@@ -46,7 +46,7 @@ class CartsController extends Controller
 
         $product = Product::find($request->product_id);
 
-        $cart = Cart::create([
+        Cart::create([
             'user_id' => Auth::user()->id,
             'product_id' => $request->product_id,
             'quantity' => $request->quantity,
@@ -63,9 +63,9 @@ class CartsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Cart $cart)
     {
-        //
+        return $cart;
     }
 
     /**
@@ -74,9 +74,9 @@ class CartsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Cart $cart)
     {
-        //
+        return $cart;
     }
 
     /**
