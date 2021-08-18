@@ -25,11 +25,16 @@
                                     <span>Total : Rp {{ number_format($cart->total,0 ,0, ',')}}</span>
                                     <div class="d-flex">
                                         <a href="{{ route('carts.edit', $cart->id) }}" class="material-icons mr-2 text-decoration-none" style="font-size: 20px;">edit</a>
-                                        <span class="material-icons text-danger" style="font-size: 20px;">remove_circle</span>
+                                        <a class="material-icons text-danger text-decoration-none" style="font-size: 20px; cursor: pointer;" onclick="event.preventDefault();
+                                            document.getElementById('{{ $cart->id . '-delete' }}').submit();">remove_circle</a>
                                     </div>
                                 </div>
                             </div>
                             <hr>
+                            <form action="{{ route('carts.destroy', $cart->id) }}" method="post" id="{{ $cart->id . '-delete' }}">
+                                @csrf
+                                @method('DELETE')
+                            </form>
                         @endforeach
                         <a href="#" class="btn btn-sm btn-success">Pay Now</a>
                     </div>
