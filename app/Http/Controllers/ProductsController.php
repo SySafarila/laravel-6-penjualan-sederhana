@@ -12,7 +12,7 @@ class ProductsController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth', 'seller']);
+        $this->middleware('seller');
     }
     /**
      * Display a listing of the resource.
