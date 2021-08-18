@@ -14,7 +14,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', 'HomeController@home');
+Route::get('/', 'HomeController@home')->name('root');
 
 Auth::routes();
 
