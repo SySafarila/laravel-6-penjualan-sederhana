@@ -20,4 +20,5 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('seller/products', 'ProductsController');
+Route::resource('seller/products', 'ProductsController')->except('show');
+Route::get('/products/{product}', 'ProductsController@show')->name('products.show');

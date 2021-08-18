@@ -12,7 +12,7 @@ class ProductsController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('seller');
+        $this->middleware('seller')->except('show');
     }
     /**
      * Display a listing of the resource.
@@ -81,7 +81,9 @@ class ProductsController extends Controller
      */
     public function show(Product $product)
     {
-        return $product;
+        $product = Product::with('images')->find($product)->first();
+        // return $product;
+        return view('products.show', compact('product'));
     }
 
     /**
