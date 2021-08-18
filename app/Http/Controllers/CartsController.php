@@ -54,7 +54,7 @@ class CartsController extends Controller
             'total' => $product->price * $request->quantity
         ]);
 
-        return $cart;
+        return redirect()->route('products.show', $product->id)->with('status', 'Added to your cart');
     }
 
     /**
