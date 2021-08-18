@@ -14,7 +14,9 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        return Product::all();
+        $products = Product::all();
+        $number = 1;
+        return view('products.index', compact('products', 'number'));
     }
 
     /**
@@ -24,7 +26,7 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        return 'create page';
+        return view('products.create');
     }
 
     /**
@@ -41,13 +43,13 @@ class ProductsController extends Controller
             'price' => ['required', 'numeric']
         ]);
 
-        Product::create([
+        $product = Product::create([
             'name' => $request->name,
             'description' => $request->description,
             'price' => $request->price
         ]);
 
-        return 'created';
+        return redirect()->route('products.index')->with('status', 'Product created !');
     }
 
     /**
@@ -69,7 +71,7 @@ class ProductsController extends Controller
      */
     public function edit(Product $product)
     {
-        return $product;
+        return view('products.edit', compact('product'));
     }
 
     /**
@@ -93,7 +95,7 @@ class ProductsController extends Controller
             'price' => $request->price
         ]);
 
-        return 'updated';
+        return redirect()->route('products.index')->with('status', 'Product updated !');
     }
 
     /**
@@ -106,6 +108,6 @@ class ProductsController extends Controller
     {
         $product->delete();
 
-        return 'deleted';
+        return redirect()->route('products.index')->with('status', 'Product deleted !');
     }
 }
