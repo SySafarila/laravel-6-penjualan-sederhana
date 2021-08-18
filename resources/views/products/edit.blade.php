@@ -14,7 +14,7 @@
                             </div>
                         @endif
 
-                        <form action="{{ route('products.update', $product->id) }}" method="post">
+                        <form action="{{ route('products.update', $product->id) }}" method="post" enctype="multipart/form-data">
                             @csrf
                             @method('PATCH')
                             <div class="form-group">
@@ -30,6 +30,10 @@
                             <div class="form-group">
                                 <label for="price">Price</label>
                                 <input type="number" class="form-control" name="price" id="price" value="{{ $product->price }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="images">Images</label>
+                                <input type="file" class="form-control" name="images[]" id="images" multiple>
                             </div>
                             <button type="submit" class="btn btn-primary">Create</button>
                         </form>
