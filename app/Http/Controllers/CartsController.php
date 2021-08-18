@@ -123,5 +123,6 @@ class CartsController extends Controller
         if ($cart->user_id == Auth::user()->id) {
             $cart->delete();
         }
+        return redirect()->route('root');
     }
 }
