@@ -76,7 +76,7 @@ class CartsController extends Controller
      */
     public function edit(Cart $cart)
     {
-        return $cart;
+        return view('carts.edit', compact('cart'));
     }
 
     /**
@@ -86,9 +86,18 @@ class CartsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Cart $cart)
     {
-        //
+        // return $cart;
+        $product = Product::find($cart->product_id);
+
+        $cart->update([
+            'quantity' => $request->quantity,
+            'price' => $product->price,
+            'total' => $product->price * $request->quantity
+        ]);
+
+        return redirect()->route('carts.index')->with('status', 'Cart updated !');
     }
 
     /**
