@@ -11,7 +11,7 @@
                 @endif
                 <div class="card">
                     <div class="card-header d-flex">
-                        <span class="mr-1">Edit Cart</span>
+                        <span class="mr-1">Edit Cart Quantity</span>
                     </div>
                     <div class="card-body">
                         <form action="{{ route('carts.update', $cart->id) }}" method="post">
