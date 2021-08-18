@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Product;
+use App\ProductImage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ProductsController extends Controller
 {
@@ -48,6 +50,20 @@ class ProductsController extends Controller
             'description' => $request->description,
             'price' => $request->price
         ]);
+
+        if ($request->hasFile('images') == true) {
+            foreach ($request->file('images') as $image) {
+                $random = Str::random(10);
+                $imgName = $random . '-' . $image->getClientOriginalName();
+
+                ProductImage::create([
+                    'product_id' => $product->id,
+                    'image' => $imgName
+                ]);
+
+                $image->storeAs('/public/menuImages', $imgName);
+            }
+        }
 
         return redirect()->route('products.index')->with('status', 'Product created !');
     }
