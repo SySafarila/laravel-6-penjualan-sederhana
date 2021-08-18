@@ -10,4 +10,9 @@ class ProductImage extends Model
     use SoftDeletes;
 
     protected $guarded = ['id'];
+
+    public function product()
+    {
+        return $this->belongsTo('App\Product');
+    }
 }

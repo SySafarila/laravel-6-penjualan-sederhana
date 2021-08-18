@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Product;
 use App\ProductImage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class ProductsController extends Controller
@@ -61,7 +62,7 @@ class ProductsController extends Controller
                     'image' => $imgName
                 ]);
 
-                $image->storeAs('/public/menuImages', $imgName);
+                $image->storeAs('/public/productImages', $imgName);
             }
         }
 
@@ -122,6 +123,13 @@ class ProductsController extends Controller
      */
     public function destroy(Product $product)
     {
+        // return $product->images[0];
+        foreach ($product->images as $image) {
+            if (Storage::disk('local')->exists('public/productImages/' . $image->image)) {
+                Storage::disk('local')->move('public/productImages/' . $image->image, 'trash/productImages/' . $image->image);
+            }
+            ProductImage::destroy($image->id);
+        }
         $product->delete();
 
         return redirect()->route('products.index')->with('status', 'Product deleted !');
