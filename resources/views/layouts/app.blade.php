@@ -67,6 +67,11 @@
                                             Products
                                         </a>
                                     @endif
+                                    @if (Auth::user()->role->name == 'buyer')
+                                        <a class="dropdown-item" href="{{ route('carts.index') }}">
+                                            Cart
+                                        </a>
+                                    @endif
                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}

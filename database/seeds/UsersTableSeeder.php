@@ -23,5 +23,14 @@ class UsersTableSeeder extends Seeder
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
+        // generating buyer
+        DB::table('users')->insert([
+            'name' => 'Buyer',
+            'email' => 'buyer@buyer.com',
+            'password' => Hash::make('password'),
+            'role_id' => '1', // seller
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
     }
 }

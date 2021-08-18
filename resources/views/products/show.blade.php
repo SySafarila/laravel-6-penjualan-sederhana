@@ -31,7 +31,12 @@
                             {{-- <span class="badge badge-pill badge-success align-middle" style="white-space: pre;">Stock : {{ $product->stock }}</span> --}}
                         </div>
                         <p class="card-text">{{ $product->description }}</p>
-                        <a href="#" class="btn btn-block btn-success">Add To Cart</a>
+                        <form action="{{ route('carts.store') }}" method="post">
+                            @csrf
+                            <input type="number" name="quantity" id="quantity" class="form-control mb-2" value="1" min="1">
+                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                            <button type="submit" class="btn btn-block btn-success">Add To Cart</button>
+                        </form>
                     </div>
                 </div>
             </div>
