@@ -47,7 +47,7 @@
                             <button type="submit" class="btn btn-outline-primary btn-sm mt-2">Upload Payment</button>
                         </form>
                         @else
-                            <a href="#" class="btn btn-outline-success btn-sm mt-2">Confirm Payment</a>
+                            <a href="#" class="btn btn-outline-success btn-sm mt-2" onclick="alert('Confirm via WA');">Confirm Payment</a>
                         @endif
                     </div>
                 </div>
