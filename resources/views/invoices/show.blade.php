@@ -28,7 +28,7 @@
                         </div>
                         <span class="font-weight-bold">Products :</span>
                         @foreach ($invoice->invoiceProducts as $product)
-                            <div class="d-flex flex-column p-3 rounded-lg shadow-sm my-1">
+                            <div class="d-flex flex-column p-3 rounded-lg border my-1">
                                 <span>{{ $product->product }}</span>
                                 <div class="border-top d-flex justify-content-between mt-1 pt-1">
                                     <span>{{ $product->quantity }} x
@@ -44,10 +44,10 @@
                             @method('PATCH')
                             <label for="image">Upload your payment*</label>
                             <input type="file" name="image" id="image" class="border rounded-lg w-100" required>
-                            <button type="submit" class="btn btn-outline-primary btn-sm mt-2">Upload Payment</button>
+                            <button type="submit" class="btn btn-outline-primary btn-sm">Upload Payment</button>
                         </form>
                         @else
-                            <a href="#" class="btn btn-outline-success btn-sm mt-2" onclick="alert('Confirm via WA');">Confirm Payment</a>
+                            <a href="#" class="btn btn-outline-success btn-sm" onclick="alert('Confirm via WA');">Confirm Payment</a>
                         @endif
                     </div>
                 </div>
