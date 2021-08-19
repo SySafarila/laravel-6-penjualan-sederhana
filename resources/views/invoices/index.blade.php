@@ -40,7 +40,7 @@
                             @endforeach
                             <div id="actions" class="align-items-baseline d-flex justify-content-between">
                                 @if ($invoice->status == 'waiting payment')
-                                    <a href="#" class="btn btn-outline-primary btn-sm mt-2">Upload Payment</a>
+                                    <a href="{{ route('invoices.show', $invoice->id) }}" class="btn btn-outline-primary btn-sm mt-2">Upload Payment</a>
                                 @else
                                     <a href="#" class="btn btn-outline-success btn-sm mt-2"
                                         onclick="alert('Confirm via WA');">Confirm Payment</a>
