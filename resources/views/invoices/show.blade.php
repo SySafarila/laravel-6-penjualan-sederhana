@@ -47,7 +47,10 @@
                             <button type="submit" class="btn btn-outline-primary btn-sm">Upload Payment</button>
                         </form>
                         @else
-                            <a href="#" class="btn btn-outline-success btn-sm" onclick="alert('Confirm via WA');">Confirm Payment</a>
+                            <p class="font-weight-bold">Payment Image</p>
+                            <img src="{{ asset('/storage/paymentImages/' . $invoice->payment_image) }}" alt="{{ asset('/storage/paymentImages/' . $invoice->payment_image) }}" class="w-50">
+                            <br>
+                            <a href="#" class="btn btn-outline-success btn-sm mt-2" onclick="alert('Confirm via WA');">Confirm Payment</a>
                         @endif
                     </div>
                 </div>

@@ -84,6 +84,7 @@ class InvoicesController extends Controller
      */
     public function show(Invoice $invoice)
     {
+        // return $invoice;
         if ($invoice->user_id == Auth::user()->id) {
             return view('invoices.show', compact('invoice'));
         }
