@@ -71,6 +71,9 @@
                                         <a class="dropdown-item" href="{{ route('carts.index') }}">
                                             Cart
                                         </a>
+                                        <a class="dropdown-item" href="{{ route('invoices.index') }}">
+                                            Invoices
+                                        </a>
                                     @endif
                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();">

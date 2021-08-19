@@ -41,7 +41,7 @@
                             @if ($invoice->status == 'waiting payment')
                                 <a href="#" class="btn btn-outline-primary btn-sm mt-2">Upload Payment</a>
                             @else
-                                <a href="#" class="btn btn-outline-primary btn-sm mt-2">Confirm Payment</a>
+                                <a href="#" class="btn btn-outline-success btn-sm mt-2">Confirm Payment</a>
                             @endif
                             @if (!$loop->last)
                                 <hr>
