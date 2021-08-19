@@ -33,7 +33,9 @@
                                     </tr>
                                 @endforeach
                                 @if ($invoices->count() == 0)
-                                    <p class="mb-0">Empty</p>
+                                    <tr>
+                                        <td colspan="4" class="text-center">Empty</td>
+                                    </tr>
                                 @endif
                             </tbody>
                         </table>

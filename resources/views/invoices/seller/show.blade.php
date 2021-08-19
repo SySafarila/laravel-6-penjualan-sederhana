@@ -26,6 +26,10 @@
                             <span>Status</span>
                             <span class="text-capitalize">{{ $invoice->status }}</span>
                         </div>
+                        <div class="d-flex justify-content-between">
+                            <span>Total</span>
+                            <span class="font-weight-bold">Rp{{ number_format($invoice->total, 0, 0, ',') }}</span>
+                        </div>
                         <span class="font-weight-bold">Products :</span>
                         @foreach ($invoice->invoiceProducts as $product)
                             <div class="d-flex flex-column p-3 rounded-lg border my-1">
@@ -38,21 +42,43 @@
                             </div>
                         @endforeach
                         @if ($invoice->status == 'waiting payment')
-                        {{-- <form action="{{ route('invoices.uploadImage', $invoice->id) }}" method="post" enctype="multipart/form-data">
+                            {{-- <form action="{{ route('invoices.uploadImage', $invoice->id) }}" method="post" enctype="multipart/form-data">
                             @csrf
                             @method('PATCH')
                             <label for="image">Upload your payment*</label>
                             <input type="file" name="image" id="image" class="border rounded-lg w-100" required>
                             <button type="submit" class="btn btn-outline-primary btn-sm mt-2">Upload Payment</button>
                         </form> --}}
-                        @else
+                        @endif
+                        @if ($invoice->status == 'payment success')
                             <hr>
                             <p class="font-weight-bold">Payment Image</p>
                             <a href="{{ asset('/storage/paymentImages/' . $invoice->payment_image) }}">
-                                <img src="{{ asset('/storage/paymentImages/' . $invoice->payment_image) }}" alt="{{ asset('/storage/paymentImages/' . $invoice->payment_image) }}" class="w-50">
+                                <img src="{{ asset('/storage/paymentImages/' . $invoice->payment_image) }}"
+                                    alt="{{ asset('/storage/paymentImages/' . $invoice->payment_image) }}" class="w-50">
+                            </a>
+                            <br>
+                            <form action="{{ route('invoices.acceptPayment', $invoice->id) }}" method="post">
+                                @csrf
+                                @method('PATCH')
+                                <button type="submit" class="btn btn-outline-success btn-sm mt-2">Accept Payment</button>
+                            </form>
+                            <a href="#" class="btn btn-outline-danger btn-sm mt-2">Decline Payment</a>
+                        @endif
+                        @if ($invoice->status == 'complete')
+                            <hr>
+                            <p class="font-weight-bold">Payment Image</p>
+                            <a href="{{ asset('/storage/paymentImages/' . $invoice->payment_image) }}">
+                                <img src="{{ asset('/storage/paymentImages/' . $invoice->payment_image) }}"
+                                    alt="{{ asset('/storage/paymentImages/' . $invoice->payment_image) }}" class="w-50">
                             </a>
                             {{-- <br>
-                            <a href="#" class="btn btn-outline-success btn-sm mt-2" onclick="alert('Confirm via WA');">Confirm Payment</a> --}}
+                            <form action="{{ route('invoices.acceptPayment', $invoice->id) }}" method="post">
+                                @csrf
+                                @method('PATCH')
+                                <button type="submit" class="btn btn-outline-success btn-sm mt-2">Accept Payment</button>
+                            </form>
+                            <a href="#" class="btn btn-outline-danger btn-sm mt-2">Decline Payment</a> --}}
                         @endif
                     </div>
                 </div>

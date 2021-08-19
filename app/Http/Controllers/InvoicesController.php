@@ -154,4 +154,13 @@ class InvoicesController extends Controller
             return redirect()->route('invoices.show', $invoice->id)->with('status', 'Payment uploaded !');
         }
     }
+
+    public function acceptPayment(Invoice $invoice)
+    {
+        $invoice->update([
+            'status' => 'complete'
+        ]);
+
+        return redirect()->route('seller.invoices.show', $invoice->id)->with('status', 'Payment accepted !');
+    }
 }

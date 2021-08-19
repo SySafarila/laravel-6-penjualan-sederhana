@@ -26,6 +26,7 @@ Route::get('/products/{product}', 'ProductsController@show')->name('products.sho
 Route::resource('carts', 'CartsController');
 
 Route::resource('invoices', 'InvoicesController');
-Route::patch('invoices/{invoice}', 'InvoicesController@uploadImage')->name('invoices.uploadImage');
+Route::patch('invoices/{invoice}/upload-image', 'InvoicesController@uploadImage')->name('invoices.uploadImage');
+Route::patch('invoices/{invoice}/accept-payment', 'InvoicesController@acceptPayment')->name('invoices.acceptPayment');
 Route::get('/seller/invoices', 'InvoicesController@index')->name('seller.invoices.index');
 Route::get('/seller/invoices/{invoice}', 'InvoicesController@show')->name('seller.invoices.show');
