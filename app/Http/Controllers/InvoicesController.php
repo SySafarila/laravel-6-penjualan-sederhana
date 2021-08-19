@@ -82,9 +82,12 @@ class InvoicesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Invoice $invoice)
     {
-        //
+        if ($invoice->user_id == Auth::user()->id) {
+            return view('invoices.show', compact('invoice'));
+        }
+        return redirect()->route('root');
     }
 
     /**
@@ -119,5 +122,23 @@ class InvoicesController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function uploadImage(Request $request, Invoice $invoice)
+    {
+        // return dd($request);
+        if ($request->hasFile('image') == true) {
+            $random = uniqid('INV-');
+            $imgName = $random . '-' . $request->file('image')->getClientOriginalName();
+
+            $invoice->update([
+                'payment_image' => $imgName,
+                'status' => 'payment success'
+            ]);
+
+            $request->file('image')->storeAs('/public/paymentImages/', $imgName);
+
+            return redirect()->route('invoices.show', $invoice->id)->with('status', 'Payment uploaded !');
+        }
     }
 }

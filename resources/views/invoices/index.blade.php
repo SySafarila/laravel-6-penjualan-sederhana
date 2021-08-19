@@ -47,6 +47,9 @@
                                 <hr>
                             @endif
                         @endforeach
+                        @if ($invoices->count() == 0)
+                            <p class="mb-0">Empty</p>
+                        @endif
                     </div>
                 </div>
             </div>
