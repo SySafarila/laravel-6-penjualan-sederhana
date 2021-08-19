@@ -14,29 +14,38 @@
                         <span class="mr-1">Cart</span>
                     </div>
                     <div class="card-body">
-                        @foreach ($carts as $cart)
+                        @forelse ($carts as $cart)
                             <div>
                                 <p class="font-weight-bold mb-0">{{ $cart->product->name }}</p>
                                 <div class="d-flex justify-content-between">
-                                    <span>Price : Rp {{ number_format($cart->price,0 ,0, ',')}}</span>
+                                    <span>Price : Rp {{ number_format($cart->price, 0, 0, ',') }}</span>
                                     <span>Quantity : {{ $cart->quantity }}</span>
                                 </div>
                                 <div class="d-flex justify-content-between">
-                                    <span>Total : Rp {{ number_format($cart->total,0 ,0, ',')}}</span>
+                                    <span>Total : Rp {{ number_format($cart->total, 0, 0, ',') }}</span>
                                     <div class="d-flex">
-                                        <a href="{{ route('carts.edit', $cart->id) }}" class="material-icons mr-2 text-decoration-none" style="font-size: 20px;">edit</a>
-                                        <a class="material-icons text-danger text-decoration-none" style="font-size: 20px; cursor: pointer;" onclick="event.preventDefault();
-                                            document.getElementById('{{ $cart->id . '-delete' }}').submit();">remove_circle</a>
+                                        <a href="{{ route('carts.edit', $cart->id) }}"
+                                            class="material-icons mr-2 text-decoration-none"
+                                            style="font-size: 20px;">edit</a>
+                                        <a class="material-icons text-danger text-decoration-none"
+                                            style="font-size: 20px; cursor: pointer;"
+                                            onclick="event.preventDefault();
+                                                document.getElementById('{{ $cart->id . '-delete' }}').submit();">remove_circle</a>
                                     </div>
                                 </div>
                             </div>
                             <hr>
-                            <form action="{{ route('carts.destroy', $cart->id) }}" method="post" id="{{ $cart->id . '-delete' }}">
+                            <form action="{{ route('carts.destroy', $cart->id) }}" method="post"
+                                id="{{ $cart->id . '-delete' }}">
                                 @csrf
                                 @method('DELETE')
                             </form>
-                        @endforeach
-                        <a href="#" class="btn btn-sm btn-success">Pay Now</a>
+                        @empty
+                            <p class="mb-0">Empty</p>
+                        @endforelse
+                        @if ($carts->count() != 0)
+                            <a href="#" class="btn btn-sm btn-success">Pay Now</a>
+                        @endif
                     </div>
                 </div>
             </div>
