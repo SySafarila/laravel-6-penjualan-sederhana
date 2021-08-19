@@ -28,7 +28,7 @@ class UsersTableSeeder extends Seeder
             'name' => 'Buyer',
             'email' => 'buyer@buyer.com',
             'password' => Hash::make('password'),
-            'role_id' => '1', // seller
+            'role_id' => '2', // buyer
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
