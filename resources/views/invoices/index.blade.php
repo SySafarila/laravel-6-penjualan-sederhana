@@ -15,7 +15,7 @@
                     </div>
                     <div class="card-body">
                         @foreach ($invoices as $invoice)
-                            <div class="d-flex justify-content-between">
+                            <div class="d-flex font-weight-bold justify-content-between">
                                 <span>No. Invoice</span>
                                 <span>{{ $invoice->code }}</span>
                             </div>
@@ -29,7 +29,7 @@
                             </div>
                             <span class="font-weight-bold">Products :</span>
                             @foreach ($invoice->invoiceProducts as $product)
-                                <div class="d-flex flex-column p-2 rounded-lg shadow-sm my-1">
+                                <div class="d-flex flex-column p-3 rounded-lg shadow-sm my-1">
                                     <span>{{ $product->product }}</span>
                                     <div class="border-top d-flex justify-content-between mt-1 pt-1">
                                         <span>{{ $product->quantity }} x
