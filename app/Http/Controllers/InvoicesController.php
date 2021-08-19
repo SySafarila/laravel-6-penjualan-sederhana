@@ -17,7 +17,8 @@ class InvoicesController extends Controller
      */
     public function index()
     {
-        //
+        $invoices = Invoice::with('invoiceProducts')->where('user_id', Auth::user()->id)->get();
+        return $invoices;
     }
 
     /**
@@ -62,9 +63,11 @@ class InvoicesController extends Controller
                 'quantity' => $cart->quantity,
                 'total' => $cart->product->price * $cart->quantity
             ]);
+
+            $cart->delete();
         }
 
-        return 'invoice created';
+        return redirect()->route('carts.index')->with('status', 'Invoice created !');
     }
 
     /**
