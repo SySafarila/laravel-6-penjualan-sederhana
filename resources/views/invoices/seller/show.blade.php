@@ -63,7 +63,11 @@
                                 @method('PATCH')
                                 <button type="submit" class="btn btn-outline-success btn-sm mt-2">Accept Payment</button>
                             </form>
-                            <a href="#" class="btn btn-outline-danger btn-sm mt-2">Decline Payment</a>
+                            <form action="{{ route('invoices.declinePayment', $invoice->id) }}" method="post">
+                                @csrf
+                                @method('PATCH')
+                                <button type="submit" class="btn btn-outline-danger btn-sm mt-2">Decline Payment</button>
+                            </form>
                         @endif
                         @if ($invoice->status == 'complete')
                             <hr>
@@ -79,6 +83,14 @@
                                 <button type="submit" class="btn btn-outline-success btn-sm mt-2">Accept Payment</button>
                             </form>
                             <a href="#" class="btn btn-outline-danger btn-sm mt-2">Decline Payment</a> --}}
+                        @endif
+                        @if ($invoice->status == 'declined')
+                            <hr>
+                            <p class="font-weight-bold">Payment Image</p>
+                            <a href="{{ asset('/storage/paymentImages/' . $invoice->payment_image) }}">
+                                <img src="{{ asset('/storage/paymentImages/' . $invoice->payment_image) }}"
+                                    alt="{{ asset('/storage/paymentImages/' . $invoice->payment_image) }}" class="w-50">
+                            </a>
                         @endif
                     </div>
                 </div>

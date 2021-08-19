@@ -7,6 +7,7 @@ use App\Invoice;
 use App\InvoiceProduct;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class InvoicesController extends Controller
 {
@@ -162,5 +163,27 @@ class InvoicesController extends Controller
         ]);
 
         return redirect()->route('seller.invoices.show', $invoice->id)->with('status', 'Payment accepted !');
+    }
+
+    public function declinePayment(Invoice $invoice)
+    {
+        $invoice->update([
+            'status' => 'declined'
+        ]);
+
+        return redirect()->route('seller.invoices.show', $invoice->id)->with('status', 'Payment declined !');
+    }
+
+    public function cancelPayment(Invoice $invoice)
+    {
+        if (Storage::disk('local')->exists('public/paymentImages/' . $invoice->payment_image)) {
+            Storage::disk('local')->delete('public/paymentImages/' . $invoice->payment_image);
+        }
+
+        $invoice->update([
+            'status' => 'waiting payment'
+        ]);
+
+        return redirect()->route('invoices.show', $invoice->id)->with('status', 'Payment canceled !');
     }
 }

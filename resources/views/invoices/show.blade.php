@@ -61,10 +61,21 @@
                             <br>
                             <a href="#" class="btn btn-outline-success btn-sm mt-2"
                                 onclick="alert('Confirm via WA');">Confirm Payment</a>
-                            <a href="#" class="btn btn-outline-danger btn-sm mt-2" onclick="alert('Confirm via WA');">Cancel
-                                Payment</a>
+                            <form action="{{ route('invoices.cancelPayment', $invoice->id) }}" method="post">
+                                @csrf
+                                @method('PATCH')
+                                <button type="submit" class="btn btn-outline-danger btn-sm mt-2">Cancel Payment</button>
+                            </form>
                         @endif
                         @if ($invoice->status == 'complete')
+                            <p class="font-weight-bold">Payment Image</p>
+                            <a href="{{ asset('/storage/paymentImages/' . $invoice->payment_image) }}">
+                                <img src="{{ asset('/storage/paymentImages/' . $invoice->payment_image) }}"
+                                    alt="{{ asset('/storage/paymentImages/' . $invoice->payment_image) }}" class="w-50">
+                            </a>
+                        @endif
+                        @if ($invoice->status == 'declined')
+                            <hr>
                             <p class="font-weight-bold">Payment Image</p>
                             <a href="{{ asset('/storage/paymentImages/' . $invoice->payment_image) }}">
                                 <img src="{{ asset('/storage/paymentImages/' . $invoice->payment_image) }}"
