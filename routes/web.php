@@ -27,3 +27,4 @@ Route::resource('carts', 'CartsController');
 
 Route::resource('invoices', 'InvoicesController');
 Route::patch('invoices/{invoice}', 'InvoicesController@uploadImage')->name('invoices.uploadImage');
+Route::get('/seller/invoices', 'InvoicesController@index')->name('seller.invoices.index');

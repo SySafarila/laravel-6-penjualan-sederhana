@@ -66,6 +66,9 @@
                                         <a class="dropdown-item" href="{{ route('products.index') }}">
                                             Products
                                         </a>
+                                        <a class="dropdown-item" href="{{ route('seller.invoices.index') }}">
+                                            Invoices
+                                        </a>
                                     @endif
                                     @if (Auth::user()->role->name == 'buyer')
                                         <a class="dropdown-item" href="{{ route('carts.index') }}">

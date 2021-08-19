@@ -21,6 +21,14 @@ class InvoicesController extends Controller
      */
     public function index()
     {
+        // seller
+        if (Auth::user()->role->name == 'seller') {
+            $number = 1;
+            $invoices = Invoice::with('invoiceProducts')->get();
+            return view('invoices.seller.index', compact('invoices', 'number'));
+        }
+
+        // buyer
         $invoices = Invoice::with('invoiceProducts')->where('user_id', Auth::user()->id)->get();
         // return $invoices;
         return view('invoices.index', compact('invoices'));
