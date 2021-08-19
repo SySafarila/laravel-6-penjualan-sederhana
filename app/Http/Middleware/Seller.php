@@ -16,9 +16,10 @@ class Seller
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->role->name == 'seller') {
+        if (Auth::user()->role->name == 'seller') {
             return $next($request);
         }
-        return redirect()->route('root');
+        // return redirect()->route('root');
+        return abort(404);
     }
 }

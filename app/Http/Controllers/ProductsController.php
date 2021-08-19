@@ -13,7 +13,7 @@ class ProductsController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('seller')->except('show');
+        $this->middleware(['auth', 'seller'])->except('show');
     }
     /**
      * Display a listing of the resource.
