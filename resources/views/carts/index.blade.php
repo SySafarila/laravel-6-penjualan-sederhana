@@ -44,7 +44,12 @@
                             <p class="mb-0">Empty</p>
                         @endforelse
                         @if ($carts->count() != 0)
-                            <a href="#" class="btn btn-sm btn-success">Pay Now</a>
+                            {{-- <a href="{{ route('invoices.store') }}" class="btn btn-sm btn-success">Pay Now</a> --}}
+                            <form action="{{ route('invoices.store') }}" method="post">
+                                @csrf
+                                {{-- <input type="hidden" name="user_id" value="{{ request()->user()->id }}"> --}}
+                                <button type="submit" class="btn btn-sm btn-success">Pay Now</button>
+                            </form>
                         @endif
                     </div>
                 </div>

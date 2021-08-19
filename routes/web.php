@@ -24,3 +24,4 @@ Route::resource('seller/products', 'ProductsController')->except('show');
 Route::get('/products/{product}', 'ProductsController@show')->name('products.show');
 
 Route::resource('carts', 'CartsController');
+Route::resource('invoices', 'InvoicesController');
