@@ -12,6 +12,7 @@ class CartsController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware(['auth', 'buyer'])->only(['index', 'store', 'show', 'edit', 'update', 'destroy']);
     }
     /**
      * Display a listing of the resource.
