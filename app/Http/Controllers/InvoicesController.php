@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Auth;
 
 class InvoicesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +22,8 @@ class InvoicesController extends Controller
     public function index()
     {
         $invoices = Invoice::with('invoiceProducts')->where('user_id', Auth::user()->id)->get();
-        return $invoices;
+        // return $invoices;
+        return view('invoices.index', compact('invoices'));
     }
 
     /**
@@ -61,7 +66,8 @@ class InvoicesController extends Controller
                 'product' => $cart->product->name,
                 'price' => $cart->product->price,
                 'quantity' => $cart->quantity,
-                'total' => $cart->product->price * $cart->quantity
+                'total' => $cart->product->price * $cart->quantity,
+                'status' => 'waiting payment'
             ]);
 
             $cart->delete();
