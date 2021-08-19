@@ -27,7 +27,7 @@
                                 @foreach ($invoices as $invoice)
                                     <tr>
                                         <th scope="row">{{ $number++ }}</th>
-                                        <td><a href="#">{{ $invoice->code }}</a></td>
+                                        <td><a href="{{ route('seller.invoices.show', $invoice->id) }}">{{ $invoice->code }}</a></td>
                                         <td class="text-capitalize">{{ $invoice->status }}</td>
                                         <td>Rp{{ number_format($invoice->total, 0, 0, ',') }}</td>
                                     </tr>
