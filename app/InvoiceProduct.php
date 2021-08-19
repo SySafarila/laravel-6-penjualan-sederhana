@@ -10,4 +10,9 @@ class InvoiceProduct extends Model
     use SoftDeletes;
 
     protected $guarded = ['id'];
+
+    public function invoice()
+    {
+        return $this->belongsTo('App\Invoice');
+    }
 }
