@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Cart;
 use App\Product;
 use App\ProductImage;
 use Illuminate\Http\Request;
@@ -157,6 +158,7 @@ class ProductsController extends Controller
             }
             ProductImage::destroy($image->id);
         }
+        Cart::where('product_id', $product->id)->first()->delete();
         $product->delete();
 
         return redirect()->route('products.index')->with('status', 'Product deleted !');
