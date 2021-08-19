@@ -45,7 +45,10 @@
                                     <a href="#" class="btn btn-outline-success btn-sm mt-2"
                                         onclick="alert('Confirm via WA');">Confirm Payment</a>
                                 @endif
-                                <a href="{{ route('invoices.show', $invoice->id) }}">Detail &rarr;</a>
+                                <a href="{{ route('invoices.show', $invoice->id) }}" class="align-items-end d-flex text-decoration-none">
+                                    <span>Detail</span>
+                                    <span class="material-icons">chevron_right</span>
+                                </a>
                             </div>
                             @if (!$loop->last)
                                 <hr>
