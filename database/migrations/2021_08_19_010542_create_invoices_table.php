@@ -21,6 +21,8 @@ class CreateInvoicesTable extends Migration
             // $table->integer('quantity');
             $table->bigInteger('total');
             $table->string('code')->unique();
+            $table->enum('status', ['waiting payment', 'payment success']);
+            $table->string('payment_image')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
