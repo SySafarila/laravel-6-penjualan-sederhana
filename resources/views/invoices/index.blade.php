@@ -42,12 +42,12 @@
                                     </div>
                                 </div>
                             @endforeach
-                            <div id="actions" class="align-items-baseline d-flex justify-content-between">
+                            <div id="actions" class="align-items-baseline d-flex justify-content-between mt-2">
                                 @if ($invoice->status == 'waiting payment')
                                     <a href="{{ route('invoices.show', $invoice->id) }}" class="btn btn-outline-primary btn-sm mt-2">Upload Payment</a>
-                                @else
+                                {{-- @else
                                     <a href="#" class="btn btn-outline-success btn-sm mt-2"
-                                        onclick="alert('Confirm via WA');">Confirm Payment</a>
+                                        onclick="alert('Confirm via WA');">Confirm Payment</a> --}}
                                 @endif
                                 <a href="{{ route('invoices.show', $invoice->id) }}" class="align-items-end d-flex text-decoration-none">
                                     <span>Detail</span>
