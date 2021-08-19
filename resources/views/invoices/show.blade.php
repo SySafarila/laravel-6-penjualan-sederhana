@@ -41,8 +41,8 @@
                                 </div>
                             </div>
                         @endforeach
-                        <hr>
                         @if ($invoice->status == 'waiting payment')
+                            <hr>
                             <form action="{{ route('invoices.uploadImage', $invoice->id) }}" method="post"
                                 enctype="multipart/form-data">
                                 @csrf
@@ -53,6 +53,7 @@
                             </form>
                         @endif
                         @if ($invoice->status == 'payment success')
+                            <hr>
                             <p class="font-weight-bold">Payment Image</p>
                             <a href="{{ asset('/storage/paymentImages/' . $invoice->payment_image) }}">
                                 <img src="{{ asset('/storage/paymentImages/' . $invoice->payment_image) }}"
@@ -68,6 +69,7 @@
                             </form>
                         @endif
                         @if ($invoice->status == 'complete')
+                            <hr>
                             <p class="font-weight-bold">Payment Image</p>
                             <a href="{{ asset('/storage/paymentImages/' . $invoice->payment_image) }}">
                                 <img src="{{ asset('/storage/paymentImages/' . $invoice->payment_image) }}"
