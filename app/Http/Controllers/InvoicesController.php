@@ -14,6 +14,8 @@ class InvoicesController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('seller')->only(['sellerIndex', 'sellerShow']);
+        $this->middleware('buyer')->only(['index', 'store', 'show']);
     }
     /**
      * Display a listing of the resource.
@@ -22,17 +24,20 @@ class InvoicesController extends Controller
      */
     public function index()
     {
+        // buyer
+        $invoices = Invoice::with('invoiceProducts')->where('user_id', Auth::user()->id)->get();
+        // return $invoices;
+        return view('invoices.index', compact('invoices'));
+    }
+
+    public function sellerIndex()
+    {
         // seller
         if (Auth::user()->role->name == 'seller') {
             $number = 1;
             $invoices = Invoice::with('invoiceProducts')->get();
             return view('invoices.seller.index', compact('invoices', 'number'));
         }
-
-        // buyer
-        $invoices = Invoice::with('invoiceProducts')->where('user_id', Auth::user()->id)->get();
-        // return $invoices;
-        return view('invoices.index', compact('invoices'));
     }
 
     /**
@@ -93,14 +98,17 @@ class InvoicesController extends Controller
      */
     public function show(Invoice $invoice)
     {
-        // seller
-        if (Auth::user()->role->name == 'seller') {
-            return view('invoices.seller.show', compact('invoice'));
-        }
-
         // buyer
         if ($invoice->user_id == Auth::user()->id) {
             return view('invoices.show', compact('invoice'));
+        }
+    }
+
+    public function sellerShow(Invoice $invoice)
+    {
+        // seller
+        if (Auth::user()->role->name == 'seller') {
+            return view('invoices.seller.show', compact('invoice'));
         }
     }
 
