@@ -2,6 +2,10 @@
 
 @section('content')
     <div class="container">
+        <form action="{{ route('seller.search.invoices') }}" method="get" class="d-flex mb-4">
+            <input type="text" name="code" id="code" class="form-control mr-1" placeholder="Search invoices here...">
+            <button type="submit" class="btn btn-success material-icons">search</button>
+        </form>
         <div class="row justify-content-center">
             <div class="col-md-8">
                 @if (session('status'))
@@ -27,7 +31,9 @@
                                 @foreach ($invoices as $invoice)
                                     <tr>
                                         <th scope="row">{{ $number++ }}</th>
-                                        <td><a href="{{ route('seller.invoices.show', $invoice->id) }}">{{ $invoice->code }}</a></td>
+                                        <td><a
+                                                href="{{ route('seller.invoices.show', $invoice->id) }}">{{ $invoice->code }}</a>
+                                        </td>
                                         <td class="text-capitalize">{{ $invoice->status }}</td>
                                         <td>Rp{{ number_format($invoice->total, 0, 0, ',') }}</td>
                                     </tr>

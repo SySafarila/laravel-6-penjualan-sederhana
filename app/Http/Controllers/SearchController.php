@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Invoice;
 use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SearchController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('seller')->only('searchProductsSeller');
-        $this->middleware('buyer')->only('searchProducts');
+        $this->middleware('seller')->only(['searchProductsSeller', 'searchInvoicesSeller']);
+        $this->middleware('buyer')->only('searchProducts', 'searchInvoices');
     }
     public function searchProducts(Request $request)
     {
@@ -33,6 +35,30 @@ class SearchController extends Controller
             return view('products.index', compact('products', 'number'));
         } else {
             return redirect()->route('root');
+        }
+    }
+
+    public function searchInvoices(Request $request)
+    {
+        if ($request->code) {
+            $invoices = Invoice::where([
+                ['code', 'like', '%' . $request->code . '%'],
+                ['user_id', Auth::user()->id],
+            ])->with('invoiceProducts')->latest()->paginate(10);
+            return view('invoices.index', compact('invoices'));
+        } else {
+            return redirect()->route('invoices.index');
+        }
+    }
+
+    public function searchInvoicesSeller(Request $request)
+    {
+        if ($request->code) {
+            $number = 1;
+            $invoices = Invoice::where('code', 'like', '%' . $request->code . '%')->with('invoiceProducts')->latest()->paginate(10);
+            return view('invoices.seller.index', compact('invoices', 'number'));
+        } else {
+            return redirect()->route('seller.invoices.index');
         }
     }
 }
