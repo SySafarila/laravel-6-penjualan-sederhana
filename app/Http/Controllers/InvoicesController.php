@@ -194,4 +194,13 @@ class InvoicesController extends Controller
 
         return redirect()->route('invoices.show', $invoice->id)->with('status', 'Payment canceled !');
     }
+
+    public function cancelInvoice(Invoice $invoice)
+    {
+        $invoice->update([
+            'status' => 'canceled'
+        ]);
+
+        return redirect()->route('invoices.show', $invoice->id)->with('status', 'Invoice canceled !');
+    }
 }

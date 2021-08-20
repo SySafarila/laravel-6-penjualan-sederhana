@@ -51,6 +51,11 @@
                                 <input type="file" name="image" id="image" class="border rounded-lg w-100" accept="image/png, image/gif, image/jpeg" required>
                                 <button type="submit" class="btn btn-outline-primary btn-sm mt-2">Upload Payment</button>
                             </form>
+                            <form action="{{ route('invoices.cancelInvoice', $invoice->id) }}" method="post">
+                                @csrf
+                                @method('PATCH')
+                                <button type="submit" class="btn btn-outline-danger btn-sm mt-2">Cancel Invoice</button>
+                            </form>
                         @endif
                         @if ($invoice->status == 'payment success')
                             <hr>

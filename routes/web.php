@@ -33,6 +33,7 @@ Route::patch('invoices/{invoice}/upload-image', 'InvoicesController@uploadImage'
 Route::patch('invoices/{invoice}/accept-payment', 'InvoicesController@acceptPayment')->name('invoices.acceptPayment');
 Route::patch('invoices/{invoice}/decline-payment', 'InvoicesController@declinePayment')->name('invoices.declinePayment');
 Route::patch('invoices/{invoice}/cancel-payment', 'InvoicesController@cancelPayment')->name('invoices.cancelPayment');
+Route::patch('invoices/{invoice}/cancel-invoice', 'InvoicesController@cancelInvoice')->name('invoices.cancelInvoice');
 Route::get('/seller/invoices', 'InvoicesController@sellerIndex')->name('seller.invoices.index');
 Route::get('/seller/invoices/{invoice}', 'InvoicesController@sellerShow')->name('seller.invoices.show');
 
