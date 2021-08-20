@@ -22,7 +22,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        $products = Product::latest()->paginate(10);
         $number = 1;
         return view('products.index', compact('products', 'number'));
     }
