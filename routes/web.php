@@ -43,3 +43,7 @@ Route::get('/search-products', 'SearchController@searchProducts')->name('search.
 // search invoices
 Route::get('/seller/search-invoices', 'SearchController@searchInvoicesSeller')->name('seller.search.invoices');
 Route::get('/search-invoices', 'SearchController@searchInvoices')->name('search.invoices');
+
+// account
+Route::get('/account', 'AccountsController@index')->name('account.index');
+Route::patch('/account', 'AccountsController@updateCredentials')->name('account.updateCredentials');
