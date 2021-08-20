@@ -21,9 +21,10 @@
                                     }
                                 @endphp
                                 <div class="carousel-item @if ($loop->first) active @endif">
-                                    <img src="{{ $imagex }}" class="d-block w-100" alt="{{ $imagex }}" style="width: auto;
+                                    <img src="{{ $imagex }}" class="d-block w-100 p-2" alt="{{ $imagex }}" style="width: auto;
                                         height: 300px;
-                                        object-fit: contain;">
+                                        object-fit: contain;
+                                        background: rgb(241, 241, 241);">
                                 </div>
                             @endforeach
                         </div>
