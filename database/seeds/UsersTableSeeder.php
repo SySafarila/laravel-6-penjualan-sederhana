@@ -16,8 +16,8 @@ class UsersTableSeeder extends Seeder
     {
         // generating admin
         DB::table('users')->insert([
-            'name' => 'Admin',
-            'email' => 'admin@admin.com',
+            'name' => 'Seller',
+            'email' => 'seller@seller.com',
             'password' => Hash::make('password'),
             'role_id' => '1', // seller
             'created_at' => Carbon::now(),
