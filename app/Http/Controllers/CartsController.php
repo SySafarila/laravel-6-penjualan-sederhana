@@ -11,7 +11,7 @@ class CartsController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
         $this->middleware(['auth', 'buyer'])->only(['index', 'store', 'show', 'edit', 'update', 'destroy']);
     }
     /**
@@ -70,10 +70,11 @@ class CartsController extends Controller
      */
     public function show(Cart $cart)
     {
+        return abort(404);
         if ($cart->user_id == Auth::user()->id) {
             return $cart;
         }
-        return redirect()->route('root');
+        return abort(404);
     }
 
     /**
@@ -87,7 +88,7 @@ class CartsController extends Controller
         if ($cart->user_id == Auth::user()->id) {
             return view('carts.edit', compact('cart'));
         }
-        return redirect()->route('root');
+        return abort(404);
     }
 
     /**
@@ -110,7 +111,7 @@ class CartsController extends Controller
 
             return redirect()->route('carts.index')->with('status', 'Cart updated !');
         }
-        return redirect()->route('root');
+        return abort(404);
     }
 
     /**
@@ -125,6 +126,6 @@ class CartsController extends Controller
             $cart->delete();
             return redirect()->route('carts.index')->with('status', 'Cart deleted !');
         }
-        return redirect()->route('root');
+        return abort(404);
     }
 }
