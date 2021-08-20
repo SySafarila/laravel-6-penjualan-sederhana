@@ -2,6 +2,10 @@
 
 @section('content')
     <div class="container">
+        <form action="{{ route('seller.search.products') }}" method="get" class="d-flex mb-4">
+            <input type="text" name="name" id="name" class="form-control mr-1" placeholder="Search products here...">
+            <button type="submit" class="btn btn-success material-icons">search</button>
+        </form>
         <div class="row justify-content-center">
             <div class="col-md-8">
                 @if (session('status'))

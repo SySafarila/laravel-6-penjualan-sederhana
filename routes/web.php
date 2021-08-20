@@ -32,3 +32,6 @@ Route::patch('invoices/{invoice}/decline-payment', 'InvoicesController@declinePa
 Route::patch('invoices/{invoice}/cancel-payment', 'InvoicesController@cancelPayment')->name('invoices.cancelPayment');
 Route::get('/seller/invoices', 'InvoicesController@sellerIndex')->name('seller.invoices.index');
 Route::get('/seller/invoices/{invoice}', 'InvoicesController@sellerShow')->name('seller.invoices.show');
+
+Route::get('/seller/search-products', 'SearchController@searchProductsSeller')->name('seller.search.products');
+Route::get('/search-products', 'SearchController@searchProducts')->name('search.products');
