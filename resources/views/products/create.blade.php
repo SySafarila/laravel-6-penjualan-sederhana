@@ -18,22 +18,33 @@
                             @csrf
                             <div class="form-group">
                                 <label for="name">Name</label>
-                                <input type="text" class="form-control" name="name" id="name">
+                                <input type="text" class="form-control" name="name" id="name" value="{{ old('name') }}" required>
                             </div>
                             <div class="form-group">
                                 <label for="description">Description</label>
-                                <textarea name="description" class="form-control" id="description"></textarea>
+                                <textarea name="description" class="form-control" id="description" required>{{ old('description') }}</textarea>
                             </div>
                             <div class="form-group">
                                 <label for="price">Price</label>
-                                <input type="number" class="form-control" name="price" id="price">
+                                <input type="number" class="form-control" name="price" id="price" value="{{ old('price') }}" required>
                             </div>
                             <div class="form-group">
                                 <label for="images">Images</label>
-                                <input type="file" class="form-control" name="images[]" id="images" multiple>
+                                <input type="file" class="form-control" name="images[]" id="images" accept="image/png, image/gif, image/jpeg" multiple required>
                             </div>
                             <button type="submit" class="btn btn-primary">Create</button>
                         </form>
+                        <div class="mt-3">
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                        </div>
                     </div>
                 </div>
             </div>

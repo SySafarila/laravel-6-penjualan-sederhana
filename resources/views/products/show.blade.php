@@ -44,7 +44,7 @@
                                 {{ number_format($product->price, 0, 0, '.') }}</h6>
                             {{-- <span class="badge badge-pill badge-success align-middle" style="white-space: pre;">Stock : {{ $product->stock }}</span> --}}
                         </div>
-                        <p class="card-text">{{ $product->description }}</p>
+                        <p class="card-text" style="white-space: pre-wrap;">{{ $product->description }}</p>
                         @if (Auth::user()->role->name == 'buyer')
                             <form action="{{ route('carts.store') }}" method="post">
                                 @csrf

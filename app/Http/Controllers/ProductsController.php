@@ -49,7 +49,8 @@ class ProductsController extends Controller
         $request->validate([
             'name' => ['required', 'string'],
             'description' => ['required', 'string'],
-            'price' => ['required', 'numeric']
+            'price' => ['required', 'numeric'],
+            'images.*' => ['mimes:png,jpg']
         ]);
 
         $product = Product::create([
@@ -83,7 +84,8 @@ class ProductsController extends Controller
      */
     public function show(Product $product)
     {
-        $product = Product::with('images')->find($product)->first();
+        // return $product;
+        $product = Product::with('images')->find($product->id);
         // return $product;
         return view('products.show', compact('product'));
     }
@@ -111,7 +113,8 @@ class ProductsController extends Controller
         $request->validate([
             'name' => ['required', 'string'],
             'description' => ['required', 'string'],
-            'price' => ['required', 'numeric']
+            'price' => ['required', 'numeric'],
+            'images.*' => ['mimes:png,jpg']
         ]);
 
         $product->update([
