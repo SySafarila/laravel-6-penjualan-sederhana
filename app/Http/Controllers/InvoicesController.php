@@ -15,7 +15,7 @@ class InvoicesController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('seller')->only(['sellerIndex', 'sellerShow', 'acceptPayment', 'declinePayment']);
-        $this->middleware('buyer')->only(['index', 'store', 'show', 'uploadImage', 'cancelPayment']);
+        $this->middleware('buyer')->only(['index', 'store', 'show', 'uploadImage', 'cancelPayment', 'cancelInvoice']);
     }
     /**
      * Display a listing of the resource.
