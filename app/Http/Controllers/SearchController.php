@@ -11,9 +11,9 @@ class SearchController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
-        $this->middleware('seller')->only(['searchProductsSeller', 'searchInvoicesSeller']);
-        $this->middleware('buyer')->only('searchProducts', 'searchInvoices');
+        $this->middleware('auth')->except(['searchProducts']);
+        $this->middleware(['auth', 'seller'])->only(['searchProductsSeller', 'searchInvoicesSeller']);
+        $this->middleware(['auth', 'buyer'])->only(['searchInvoices']);
     }
     public function searchProducts(Request $request)
     {

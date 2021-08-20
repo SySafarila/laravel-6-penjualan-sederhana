@@ -48,7 +48,7 @@
                                 @csrf
                                 @method('PATCH')
                                 <label for="image">Upload your payment*</label>
-                                <input type="file" name="image" id="image" class="border rounded-lg w-100" required>
+                                <input type="file" name="image" id="image" class="border rounded-lg w-100" accept="image/png, image/gif, image/jpeg" required>
                                 <button type="submit" class="btn btn-outline-primary btn-sm mt-2">Upload Payment</button>
                             </form>
                         @endif
