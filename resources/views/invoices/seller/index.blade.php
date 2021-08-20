@@ -39,6 +39,9 @@
                                 @endif
                             </tbody>
                         </table>
+                        <div class="mt-2 d-flex justify-content-center">
+                            {{ $invoices->links() }}
+                        </div>
                     </div>
                 </div>
             </div>

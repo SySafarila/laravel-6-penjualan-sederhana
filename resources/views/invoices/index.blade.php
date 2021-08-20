@@ -61,6 +61,9 @@
                         @if ($invoices->count() == 0)
                             <p class="mb-0">Empty</p>
                         @endif
+                        <div class="d-flex justify-content-center mt-4">
+                            {{ $invoices->links() }}
+                        </div>
                     </div>
                 </div>
             </div>

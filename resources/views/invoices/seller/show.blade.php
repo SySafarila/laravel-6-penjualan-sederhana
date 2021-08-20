@@ -55,7 +55,7 @@
                             <p class="font-weight-bold">Payment Image</p>
                             <a href="{{ asset('/storage/paymentImages/' . $invoice->payment_image) }}">
                                 <img src="{{ asset('/storage/paymentImages/' . $invoice->payment_image) }}"
-                                    alt="{{ asset('/storage/paymentImages/' . $invoice->payment_image) }}" class="w-50">
+                                    alt="{{ asset('/storage/paymentImages/' . $invoice->payment_image) }}" class="mb-2 w-50">
                             </a>
                             <br>
                             <form action="{{ route('invoices.acceptPayment', $invoice->id) }}" method="post">
@@ -74,7 +74,7 @@
                             <p class="font-weight-bold">Payment Image</p>
                             <a href="{{ asset('/storage/paymentImages/' . $invoice->payment_image) }}">
                                 <img src="{{ asset('/storage/paymentImages/' . $invoice->payment_image) }}"
-                                    alt="{{ asset('/storage/paymentImages/' . $invoice->payment_image) }}" class="w-50">
+                                    alt="{{ asset('/storage/paymentImages/' . $invoice->payment_image) }}" class="mb-2 w-50">
                             </a>
                             {{-- <br>
                             <form action="{{ route('invoices.acceptPayment', $invoice->id) }}" method="post">
@@ -89,7 +89,7 @@
                             <p class="font-weight-bold">Payment Image</p>
                             <a href="{{ asset('/storage/paymentImages/' . $invoice->payment_image) }}">
                                 <img src="{{ asset('/storage/paymentImages/' . $invoice->payment_image) }}"
-                                    alt="{{ asset('/storage/paymentImages/' . $invoice->payment_image) }}" class="w-50">
+                                    alt="{{ asset('/storage/paymentImages/' . $invoice->payment_image) }}" class="mb-2 w-50">
                             </a>
                         @endif
                     </div>

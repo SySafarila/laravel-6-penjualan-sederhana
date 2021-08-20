@@ -25,7 +25,7 @@ class InvoicesController extends Controller
     public function index()
     {
         // buyer
-        $invoices = Invoice::with('invoiceProducts')->where('user_id', Auth::user()->id)->latest()->get();
+        $invoices = Invoice::with('invoiceProducts')->where('user_id', Auth::user()->id)->latest()->paginate(5);
         // return $invoices;
         return view('invoices.index', compact('invoices'));
     }
@@ -35,7 +35,7 @@ class InvoicesController extends Controller
         // seller
         if (Auth::user()->role->name == 'seller') {
             $number = 1;
-            $invoices = Invoice::with('invoiceProducts')->latest()->get();
+            $invoices = Invoice::with('invoiceProducts')->latest()->paginate(10);
             return view('invoices.seller.index', compact('invoices', 'number'));
         }
     }
