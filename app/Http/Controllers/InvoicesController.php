@@ -14,8 +14,8 @@ class InvoicesController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('seller')->only(['sellerIndex', 'sellerShow']);
-        $this->middleware('buyer')->only(['index', 'store', 'show']);
+        $this->middleware('seller')->only(['sellerIndex', 'sellerShow', 'acceptPayment', 'declinePayment']);
+        $this->middleware('buyer')->only(['index', 'store', 'show', 'uploadImage', 'cancelPayment']);
     }
     /**
      * Display a listing of the resource.
