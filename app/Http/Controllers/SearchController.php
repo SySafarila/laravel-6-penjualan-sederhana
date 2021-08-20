@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class SearchController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('seller')->only('searchProductsSeller');
+        $this->middleware('buyer')->only('searchProducts');
+    }
     public function searchProducts(Request $request)
     {
         // return $request->name;
