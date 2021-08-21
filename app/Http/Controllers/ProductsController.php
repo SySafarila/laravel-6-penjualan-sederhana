@@ -123,26 +123,26 @@ class ProductsController extends Controller
             'price' => $request->price
         ]);
 
-        foreach ($product->images as $image) {
-            if (Storage::disk('local')->exists('public/productImages/' . $image->image)) {
-                Storage::disk('local')->delete('public/productImages/' . $image->image);
-            }
-            ProductImage::destroy($image->id);
-        }
+        // foreach ($product->images as $image) {
+        //     if (Storage::disk('local')->exists('public/productImages/' . $image->image)) {
+        //         Storage::disk('local')->delete('public/productImages/' . $image->image);
+        //     }
+        //     ProductImage::destroy($image->id);
+        // }
 
-        if ($request->hasFile('images') == true) {
-            foreach ($request->file('images') as $image) {
-                $random = Str::random(10);
-                $imgName = $random . '-' . $image->getClientOriginalName();
+        // if ($request->hasFile('images') == true) {
+        //     foreach ($request->file('images') as $image) {
+        //         $random = Str::random(10);
+        //         $imgName = $random . '-' . $image->getClientOriginalName();
 
-                ProductImage::create([
-                    'product_id' => $product->id,
-                    'image' => $imgName
-                ]);
+        //         ProductImage::create([
+        //             'product_id' => $product->id,
+        //             'image' => $imgName
+        //         ]);
 
-                $image->storeAs('/public/productImages', $imgName);
-            }
-        }
+        //         $image->storeAs('/public/productImages', $imgName);
+        //     }
+        // }
 
         return redirect()->route('products.index')->with('status', 'Product updated !');
     }

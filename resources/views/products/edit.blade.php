@@ -29,11 +29,12 @@
                                 <label for="price">Price</label>
                                 <input type="number" class="form-control" name="price" id="price" value="{{ $product->price }}" required>
                             </div>
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label for="images">Images</label>
                                 <input type="file" class="form-control" name="images[]" id="images" accept="image/png, image/gif, image/jpeg" multiple required>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Create</button>
+                            </div> --}}
+                            <button type="submit" class="btn btn-primary">Update Product</button>
+                            <a href="{{ route('products.images', $product) }}" class="btn btn-success">Edit Images</a>
                         </form>
                         <div class="mt-3">
                             @if ($errors->any())

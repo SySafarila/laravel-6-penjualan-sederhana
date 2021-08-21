@@ -22,6 +22,9 @@ Route::redirect('/home', '/')->name('home');
 
 // products
 Route::resource('seller/products', 'ProductsController')->except('show');
+Route::get('/seller/products/{product}/images', 'ImagesController@index')->name('products.images');
+Route::delete('/seller/products/{product}/images/{image}', 'ImagesController@deleteImage')->name('products.images.delete');
+Route::post('/seller/products/{product}/images/upload-image', 'ImagesController@upload')->name('products.images.upload');
 Route::get('/products/{product}', 'ProductsController@show')->name('products.show');
 
 // carts
