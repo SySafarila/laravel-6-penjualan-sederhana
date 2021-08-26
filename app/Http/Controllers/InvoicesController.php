@@ -47,7 +47,7 @@ class InvoicesController extends Controller
      */
     public function create()
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -120,7 +120,7 @@ class InvoicesController extends Controller
      */
     public function edit($id)
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -132,7 +132,7 @@ class InvoicesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -143,12 +143,15 @@ class InvoicesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return abort(404);
     }
 
     public function uploadImage(Request $request, Invoice $invoice)
     {
         // return dd($request);
+        $request->validate([
+            'image' => ['required', 'mimes:png,jpg']
+        ]);
         if ($request->hasFile('image') == true) {
             $random = uniqid('INV-');
             $imgName = $random . '-' . $request->file('image')->getClientOriginalName();
