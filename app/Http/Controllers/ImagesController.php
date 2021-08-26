@@ -36,7 +36,7 @@ class ImagesController extends Controller
     public function upload(Request $request, Product $product)
     {
         $request->validate([
-            'images.*' => ['mimes:png,jpg']
+            'images.*' => ['required', 'mimes:png,jpg']
         ]);
 
         if ($request->hasFile('images') == true) {

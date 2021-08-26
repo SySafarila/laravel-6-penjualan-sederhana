@@ -50,7 +50,7 @@ class ProductsController extends Controller
             'name' => ['required', 'string'],
             'description' => ['required', 'string'],
             'price' => ['required', 'numeric'],
-            'images.*' => ['mimes:png,jpg']
+            'images.*' => ['required', 'mimes:png,jpg']
         ]);
 
         $product = Product::create([
