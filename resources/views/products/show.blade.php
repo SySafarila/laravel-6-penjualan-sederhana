@@ -21,10 +21,11 @@
                                     }
                                 @endphp
                                 <div class="carousel-item @if ($loop->first) active @endif">
-                                    <img src="{{ $imagex }}" class="d-block w-100 p-2" alt="{{ $imagex }}" style="width: auto;
-                                        height: 300px;
-                                        object-fit: contain;
-                                        background: rgb(241, 241, 241);">
+                                    <img src="{{ $imagex }}" class="d-block w-100 p-2" alt="{{ $imagex }}"
+                                        style="width: auto;
+                                                height: 300px;
+                                                object-fit: contain;
+                                                background: rgb(241, 241, 241);">
                                 </div>
                             @endforeach
                         </div>
@@ -45,15 +46,22 @@
                             {{-- <span class="badge badge-pill badge-success align-middle" style="white-space: pre;">Stock : {{ $product->stock }}</span> --}}
                         </div>
                         <p class="card-text" style="white-space: pre-wrap;">{{ $product->description }}</p>
-                        @if (Auth::user()->role->name == 'buyer')
-                            <form action="{{ route('carts.store') }}" method="post">
-                                @csrf
-                                <input type="number" name="quantity" id="quantity" class="form-control mb-2" value="1"
-                                    min="1">
-                                <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                <button type="submit" class="btn btn-block btn-success">Add To Cart</button>
-                            </form>
-                        @endif
+                        @auth
+                            @if (Auth::user()->role->name == 'buyer')
+                                <form action="{{ route('carts.store') }}" method="post">
+                                    @csrf
+                                    <input type="number" name="quantity" id="quantity" class="form-control mb-2" value="1"
+                                        min="1">
+                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                    <button type="submit" class="btn btn-block btn-success">Add To Cart</button>
+                                </form>
+                            @endif
+                        @endauth
+                        @guest
+                            <div class="alert alert-warning" role="alert">
+                                You have to <a href="{{ route('login') }}" class="alert-link">login</a> to buy this product.
+                            </div>
+                        @endguest
                     </div>
                 </div>
             </div>
