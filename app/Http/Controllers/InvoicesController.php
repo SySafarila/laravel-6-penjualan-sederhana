@@ -192,7 +192,8 @@ class InvoicesController extends Controller
         }
 
         $invoice->update([
-            'status' => 'waiting payment'
+            'status' => 'waiting payment',
+            'payment_image' => null
         ]);
 
         return redirect()->route('invoices.show', $invoice->id)->with('status', 'Payment canceled !');
