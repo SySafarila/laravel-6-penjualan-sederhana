@@ -58,7 +58,7 @@
                             @endif
                         @endauth
                         @guest
-                            <div class="alert alert-warning" role="alert">
+                            <div class="alert alert-warning mb-0" role="alert">
                                 You have to <a href="{{ route('login') }}" class="alert-link">login</a> to buy this product.
                             </div>
                         @endguest
