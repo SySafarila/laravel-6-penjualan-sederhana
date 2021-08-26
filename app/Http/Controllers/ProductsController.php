@@ -155,14 +155,21 @@ class ProductsController extends Controller
      */
     public function destroy(Product $product)
     {
-        // return $product->images[0];
+        $carts = Cart::where('product_id', $product->id)->get();
+
+        if ($carts->count() != 0) {
+            foreach ($carts as $cart) {
+                $cart->delete();
+            }
+        }
+
         foreach ($product->images as $image) {
             if (Storage::disk('local')->exists('public/productImages/' . $image->image)) {
                 Storage::disk('local')->move('public/productImages/' . $image->image, 'trash/productImages/' . $image->image);
             }
             ProductImage::destroy($image->id);
         }
-        Cart::where('product_id', $product->id)->first()->delete();
+
         $product->delete();
 
         return redirect()->route('products.index')->with('status', 'Product deleted !');
