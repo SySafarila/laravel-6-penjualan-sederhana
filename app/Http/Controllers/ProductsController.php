@@ -69,7 +69,7 @@ class ProductsController extends Controller
                     'image' => $imgName
                 ]);
 
-                $image->storeAs('/public/productImages', $imgName);
+                $image->storeAs('public/productImages/', $imgName);
             }
         }
 
