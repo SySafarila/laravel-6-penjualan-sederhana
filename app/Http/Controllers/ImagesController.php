@@ -49,7 +49,7 @@ class ImagesController extends Controller
                     'image' => $imgName
                 ]);
 
-                $image->storeAs('/public/productImages', $imgName);
+                $image->storeAs('public/productImages/', $imgName);
             }
         }
         return redirect()->route('products.images', $product)->with('status', 'Images uploaded !');
