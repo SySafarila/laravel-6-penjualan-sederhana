@@ -65,7 +65,7 @@
                                     alt="{{ asset('/storage/paymentImages/' . $invoice->payment_image) }}" class="mb-2 w-50">
                             </a>
                             <br>
-                            <a href="https://wa.me/{{ $_ENV["SELLER_PHONE"] }}?text=Confirmation for {{ $invoice->code }}" class="btn btn-outline-success btn-sm mt-2">Confirm Payment</a>
+                            <a href="https://wa.me/{{ $_ENV["SELLER_PHONE"] }}?text=Payment confirmation for {{ strtoupper($invoice->code) }}" class="btn btn-outline-success btn-sm mt-2">Confirm Payment</a>
                             <form action="{{ route('invoices.cancelPayment', $invoice->id) }}" method="post">
                                 @csrf
                                 @method('PATCH')
