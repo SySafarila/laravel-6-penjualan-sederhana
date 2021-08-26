@@ -14,6 +14,12 @@
                         <span class="mr-1">{{ $invoice->code }}</span>
                     </div>
                     <div class="card-body">
+                        <div class="border d-flex flex-column mb-3 p-3 rounded-lg">
+                            <span class="font-weight-bold">Buyer Information</span>
+                            <span>Name : {{ $invoice->user->name }}</span>
+                            <span>Email : {{ $invoice->user->email }}</span>
+                            <span>Registered : {{ $invoice->user->created_at->format('d M Y') }}</span>
+                        </div>
                         <div class="d-flex font-weight-bold justify-content-between">
                             <span>No. Invoice</span>
                             <span>{{ $invoice->code }}</span>

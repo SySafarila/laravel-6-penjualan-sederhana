@@ -108,6 +108,8 @@ class InvoicesController extends Controller
     {
         // seller
         if (Auth::user()->role->name == 'seller') {
+            $invoice = Invoice::with(['invoiceProducts', 'user'])->find($invoice->id);
+            // return $invoice;
             return view('invoices.seller.show', compact('invoice'));
         }
     }
