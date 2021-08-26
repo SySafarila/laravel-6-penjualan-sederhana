@@ -11,7 +11,7 @@
                 @endif
                 <div class="card">
                     <div class="card-header d-flex">
-                        <span class="mr-1">{{ $invoice->code }}</span>
+                        <span class="mr-1 text-uppercase">{{ $invoice->code }}</span>
                     </div>
                     <div class="card-body">
                         <div class="border d-flex flex-column mb-3 p-3 rounded-lg">
@@ -22,7 +22,7 @@
                         </div>
                         <div class="d-flex font-weight-bold justify-content-between">
                             <span>No. Invoice</span>
-                            <span>{{ $invoice->code }}</span>
+                            <span class="text-uppercase">{{ $invoice->code }}</span>
                         </div>
                         <div class="d-flex justify-content-between">
                             <span>Date</span>
