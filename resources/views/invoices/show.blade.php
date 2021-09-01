@@ -87,6 +87,8 @@
                                 <img src="{{ asset('/storage/paymentImages/' . $invoice->payment_image) }}"
                                     alt="{{ asset('/storage/paymentImages/' . $invoice->payment_image) }}" class="mb-2 w-50">
                             </a>
+                            <br>
+                            <a href="https://wa.me/{{ $_ENV["SELLER_PHONE"] }}?text=Why my payment is declined ? code : {{ strtoupper($invoice->code) }}" class="btn btn-outline-success btn-sm mt-2">Ask why my payment is declined</a>
                         @endif
                     </div>
                 </div>

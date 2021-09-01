@@ -55,6 +55,9 @@
                                 </li>
                             @endif
                         @else
+                            @component('components.carts')
+
+                            @endcomponent
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -71,9 +74,9 @@
                                         </a>
                                     @endif
                                     @if (Auth::user()->role->name == 'buyer')
-                                        <a class="dropdown-item" href="{{ route('carts.index') }}">
+                                        {{-- <a class="dropdown-item" href="{{ route('carts.index') }}">
                                             Cart
-                                        </a>
+                                        </a> --}}
                                         <a class="dropdown-item" href="{{ route('invoices.index') }}">
                                             Invoices
                                         </a>

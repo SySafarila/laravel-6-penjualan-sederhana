@@ -21,7 +21,7 @@
                         @foreach ($invoices as $invoice)
                             <div class="d-flex font-weight-bold justify-content-between">
                                 <span>No. Invoice</span>
-                                <span>{{ $invoice->code }}</span>
+                                <span class="text-uppercase">{{ $invoice->code }}</span>
                             </div>
                             <div class="d-flex justify-content-between">
                                 <span>Date</span>
