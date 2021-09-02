@@ -16,7 +16,8 @@
                 <div class="card">
                     <div class="card-header d-flex">
                         <span class="mr-1">Products</span>
-                        <a href="{{ route('products.create') }}" class="material-icons text-decoration-none" style="font-size: 20px;">add</a>
+                        <a href="{{ route('products.create') }}" class="material-icons text-decoration-none"
+                            style="font-size: 20px;">add</a>
                     </div>
                     <div class="card-body p-0">
                         <div class="table-responsive">
@@ -34,7 +35,9 @@
                                     @foreach ($products as $product)
                                         <tr>
                                             <th scope="row">{{ $number++ }}</th>
-                                            <td><a href="{{ route('products.show', $product->id) }}">{{ $product->name }}</a></td>
+                                            <td><a
+                                                    href="{{ route('products.show', $product->id) }}">{{ $product->name }}</a>
+                                            </td>
                                             <td>{{ $product->description }}</td>
                                             <td>{{ number_format($product->price, 0, 0, ',') }}</td>
                                             <td class="d-flex text-center">
@@ -45,16 +48,21 @@
                                                     method="post">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button class="material-icons text-danger text-decoration-none" style="font-size: 20px; border: none;">delete</button>
+                                                    <button class="material-icons text-danger text-decoration-none"
+                                                        style="font-size: 20px; border: none;">delete</button>
                                                 </form>
                                             </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
                             </table>
-                            <div class="d-flex justify-content-center mt-3">
-                                {{ $products->links() }}
-                            </div>
+                            @if ($products->count() == 0)
+                                <p class="text-center m-0 py-2">Empty</p>
+                            @else
+                                <div class="d-flex justify-content-center mt-3">
+                                    {{ $products->links() }}
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
