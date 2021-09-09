@@ -13,8 +13,8 @@ class ProductsController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except('show');
-        $this->middleware('seller')->except('show');
+        $this->middleware('auth')->except(['show', 'indexPublic']);
+        $this->middleware('seller')->except(['show', 'indexPublic']);
     }
     /**
      * Display a listing of the resource.
@@ -26,6 +26,12 @@ class ProductsController extends Controller
         $products = Product::latest()->paginate(10);
         $number = 1;
         return view('products.index', compact('products', 'number'));
+    }
+
+    public function indexPublic()
+    {
+        $products = Product::paginate(10);
+        return view('welcome', compact('products'));
     }
 
     /**

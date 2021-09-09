@@ -30,8 +30,8 @@
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse"
-                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -47,6 +47,12 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
+                                <a class="nav-link {{ Request::is(['products', 'products/*']) ? 'active' : '' }}"
+                                    href="{{ route('products.public.index') }}">
+                                    Products
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
                             @if (Route::has('register'))
@@ -55,8 +61,33 @@
                                 </li>
                             @endif
                         @else
+                            @if (Auth::user()->role->name == 'seller')
+                                <li class="nav-item">
+                                    <a class="nav-link {{ Request::is(['seller/products', 'products/*']) ? 'active' : '' }}" href="{{ route('products.index') }}">
+                                        Products
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link {{ Request::is(['seller/invoices', 'seller/invoices/*']) ? 'active' : '' }}" href="{{ route('seller.invoices.index') }}">
+                                        Invoices
+                                    </a>
+                                </li>
+                            @endif
+                            @if (Auth::user()->role->name == 'buyer')
+                                <li class="nav-item">
+                                    <a class="nav-link {{ Request::is(['products', 'products/*']) ? 'active' : '' }}"
+                                        href="{{ route('products.public.index') }}">
+                                        Products
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link {{ Request::is(['invoices', 'invoices/*']) ? 'active' : '' }}"
+                                        href="{{ route('invoices.index') }}">
+                                        Invoices
+                                    </a>
+                                </li>
+                            @endif
                             @component('components.carts')
-
                             @endcomponent
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
@@ -65,27 +96,24 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    @if (Auth::user()->role->name == 'seller')
+                                    {{-- @if (Auth::user()->role->name == 'seller')
                                         <a class="dropdown-item" href="{{ route('products.index') }}">
                                             Products
                                         </a>
                                         <a class="dropdown-item" href="{{ route('seller.invoices.index') }}">
                                             Invoices
                                         </a>
-                                    @endif
-                                    @if (Auth::user()->role->name == 'buyer')
-                                        {{-- <a class="dropdown-item" href="{{ route('carts.index') }}">
-                                            Cart
-                                        </a> --}}
+                                    @endif --}}
+                                    {{-- @if (Auth::user()->role->name == 'buyer')
                                         <a class="dropdown-item" href="{{ route('invoices.index') }}">
                                             Invoices
                                         </a>
-                                    @endif
+                                    @endif --}}
                                     <a class="dropdown-item" href="{{ route('account.index') }}">
                                         Account
                                     </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                         document.getElementById('logout-form').submit();">
+                                                                     document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
