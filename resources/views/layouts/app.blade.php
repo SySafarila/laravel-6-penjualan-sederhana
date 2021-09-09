@@ -63,8 +63,13 @@
                         @else
                             @if (Auth::user()->role->name == 'seller')
                                 <li class="nav-item">
-                                    <a class="nav-link {{ Request::is(['seller/products', 'products/*']) ? 'active' : '' }}" href="{{ route('products.index') }}">
+                                    <a class="nav-link {{ Request::is(['products', 'products/*']) ? 'active' : '' }}" href="{{ route('products.public.index') }}">
                                         Products
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link {{ Request::is(['seller/products']) ? 'active' : '' }}" href="{{ route('products.index') }}">
+                                        Products Manager
                                     </a>
                                 </li>
                                 <li class="nav-item">

@@ -22,7 +22,7 @@ class SearchController extends Controller
             $products = Product::where('name', 'like', '%' . $request->name . '%')->paginate(10);
             return view('welcome', compact('products'));
         } else {
-            return redirect()->route('root');
+            return redirect()->route('products.public.index');
         }
     }
 
@@ -34,7 +34,7 @@ class SearchController extends Controller
             $number = 1;
             return view('products.index', compact('products', 'number'));
         } else {
-            return redirect()->route('root');
+            return redirect()->route('products.index');
         }
     }
 

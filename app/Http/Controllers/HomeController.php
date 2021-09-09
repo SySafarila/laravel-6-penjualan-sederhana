@@ -31,6 +31,6 @@ class HomeController extends Controller
     {
         // $products = Product::paginate(10);
         // return view('welcome', compact('products'));
-        return 'landing page';
+        return view('landingpage');
     }
 }
