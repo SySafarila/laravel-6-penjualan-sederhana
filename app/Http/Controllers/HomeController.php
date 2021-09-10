@@ -31,6 +31,9 @@ class HomeController extends Controller
     {
         // $products = Product::paginate(10);
         // return view('welcome', compact('products'));
+        $ourMenu = Product::limit(3)->get();
+        $ourMenuBottom = Product::limit(12)->get();
+
         return view('landingpage');
     }
 }

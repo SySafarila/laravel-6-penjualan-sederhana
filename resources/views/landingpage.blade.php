@@ -505,7 +505,7 @@
 
                         <li class="txt14 m-b-14">
                             <i class="fa fa-envelope fs-13 dis-inline-block size19" aria-hidden="true"></i>
-                            contact@site.com
+                            Muhammadrafly84@gmail.com
                         </li>
                     </ul>
 
