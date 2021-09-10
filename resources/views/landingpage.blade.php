@@ -22,43 +22,114 @@
 <body class="animsition">
 
     <!-- Header -->
-    <header>
-        <!-- Header desktop -->
-        <div class="wrap-menu-header gradient1 trans-0-4">
-            <div class="container h-full">
-                <div class="wrap_header trans-0-3">
-                    <!-- Logo -->
-                    <div class="logo">
-                        <a href="index.html">
-                            <!-- <img src="images/icons/logo.png" alt="IMG-LOGO" data-logofixed="images/icons/logo2.png"> -->
-                            <span class="font-weight-bold">Rafly Resto</span>
-                        </a>
-                    </div>
+    <nav class="bg-white fixed-top navbar navbar-expand-md navbar-light shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url('/') }}">
+                Rafly Resto
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="{{ __('Toggle navigation') }}">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-                    <!-- Menu -->
-                    <div class="wrap_menu p-l-45 p-l-0-xl">
-                        <nav class="menu">
-                            <ul class="main_menu">
-                                <li>
-                                    <a href="index.html">Home</a>
-                                </li>
-                                <li>
-                                    <a href="#about">About</a>
-                                </li>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- Left Side Of Navbar -->
+                <ul class="navbar-nav mr-auto">
 
-                                <li>
-                                    <a href="#menu">Menu</a>
-                                </li>
+                </ul>
 
+                <!-- Right Side Of Navbar -->
+                <ul class="navbar-nav ml-auto">
+                    <!-- Authentication Links -->
+                    @guest
+                        <li class="nav-item">
+                            <a class="nav-link {{ Request::is(['products', 'products/*']) ? 'active' : '' }}"
+                                href="{{ route('products.public.index') }}">
+                                Products
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        </li>
+                        @if (Route::has('register'))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            </li>
+                        @endif
+                    @else
+                        @if (Auth::user()->role->name == 'seller')
+                            <li class="nav-item">
+                                <a class="nav-link {{ Request::is(['products', 'products/*']) ? 'active' : '' }}" href="{{ route('products.public.index') }}">
+                                    Products
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ Request::is(['seller/products']) ? 'active' : '' }}" href="{{ route('products.index') }}">
+                                    Products Manager
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ Request::is(['seller/invoices', 'seller/invoices/*']) ? 'active' : '' }}" href="{{ route('seller.invoices.index') }}">
+                                    Invoices
+                                </a>
+                            </li>
+                        @endif
+                        @if (Auth::user()->role->name == 'buyer')
+                            <li class="nav-item">
+                                <a class="nav-link {{ Request::is(['products', 'products/*']) ? 'active' : '' }}"
+                                    href="{{ route('products.public.index') }}">
+                                    Products
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ Request::is(['invoices', 'invoices/*']) ? 'active' : '' }}"
+                                    href="{{ route('invoices.index') }}">
+                                    Invoices
+                                </a>
+                            </li>
+                        @endif
+                        @component('components.carts')
+                        @endcomponent
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ Auth::user()->name }} <span class="caret"></span>
+                            </a>
 
-                            </ul>
-                        </nav>
-                    </div>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                {{-- @if (Auth::user()->role->name == 'seller')
+                                    <a class="dropdown-item" href="{{ route('products.index') }}">
+                                        Products
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('seller.invoices.index') }}">
+                                        Invoices
+                                    </a>
+                                @endif --}}
+                                {{-- @if (Auth::user()->role->name == 'buyer')
+                                    <a class="dropdown-item" href="{{ route('invoices.index') }}">
+                                        Invoices
+                                    </a>
+                                @endif --}}
+                                <a class="dropdown-item" href="{{ route('account.index') }}">
+                                    Account
+                                </a>
+                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                                 document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
 
-                </div>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                    style="display: none;">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
+                    @endguest
+                </ul>
             </div>
         </div>
-    </header>
+    </nav>
 
     <!-- Sidebar -->
     <aside class="sidebar trans-0-4">
@@ -393,7 +464,7 @@
 
 
 
-                                    <a href="#" class="txt4 m-t-40">
+                                    <a href="{{ route('products.public.index') }}" class="txt4 m-t-40">
                                         Start the order now
                                         <i class="fa fa-long-arrow-right m-l-10" aria-hidden="true"></i>
                                     </a>
