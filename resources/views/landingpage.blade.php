@@ -22,7 +22,7 @@
 <body class="animsition">
 
     <!-- Header -->
-    <nav class="bg-white fixed-top navbar navbar-expand-md navbar-light shadow-sm">
+    <nav class="bg-white fixed-top navbar navbar-expand-md navbar-light shadow-sm shadow1">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
                 Rafly Resto
@@ -495,12 +495,12 @@
                     <ul class="m-b-70">
                         <li class="txt14 m-b-14">
                             <i class="fa fa-map-marker fs-16 dis-inline-block size19" aria-hidden="true"></i>
-                            8th floor, 379 Hudson St, New York, NY 10018
+                            Ciherang Hills Residence Blok B7
                         </li>
 
                         <li class="txt14 m-b-14">
                             <i class="fa fa-phone fs-16 dis-inline-block size19" aria-hidden="true"></i>
-                            (+1) 96 716 6879
+                            (+62) 878-8482-6721
                         </li>
 
                         <li class="txt14 m-b-14">
@@ -511,12 +511,12 @@
 
                     <!-- - -->
                     <h4 class="txt13 m-b-32">
-                        Opening Times
+                        Closing Time
                     </h4>
 
                     <ul>
                         <li class="txt14">
-                            09:30 AM – 11:00 PM
+                            7:00 PM
                         </li>
 
                         <li class="txt14">
@@ -631,7 +631,7 @@
             <div class="close-mo-video-01 trans-0-4" data-dismiss="modal" aria-label="Close">&times;</div>
 
             <div class="wrap-video-mo-01">
-                <div class="w-full wrap-pic-w op-0-0"><img src="images/icons/video-16-9.jpg" alt="IMG"></div>
+                <div class="w-full wrap-pic-w op-0-0"><img src="{{ asset('landing-page/images/icons/video-16-9.jpg') }}" alt="IMG"></div>
                 <div class="video-mo-01">
                     <iframe src="https://www.youtube.com/embed/5k1hSu2gdKE?rel=0&amp;showinfo=0"
                         allowfullscreen></iframe>
