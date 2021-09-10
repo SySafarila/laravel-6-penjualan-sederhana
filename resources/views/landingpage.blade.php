@@ -60,17 +60,20 @@
                     @else
                         @if (Auth::user()->role->name == 'seller')
                             <li class="nav-item">
-                                <a class="nav-link {{ Request::is(['products', 'products/*']) ? 'active' : '' }}" href="{{ route('products.public.index') }}">
+                                <a class="nav-link {{ Request::is(['products', 'products/*']) ? 'active' : '' }}"
+                                    href="{{ route('products.public.index') }}">
                                     Products
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link {{ Request::is(['seller/products']) ? 'active' : '' }}" href="{{ route('products.index') }}">
+                                <a class="nav-link {{ Request::is(['seller/products']) ? 'active' : '' }}"
+                                    href="{{ route('products.index') }}">
                                     Products Manager
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link {{ Request::is(['seller/invoices', 'seller/invoices/*']) ? 'active' : '' }}" href="{{ route('seller.invoices.index') }}">
+                                <a class="nav-link {{ Request::is(['seller/invoices', 'seller/invoices/*']) ? 'active' : '' }}"
+                                    href="{{ route('seller.invoices.index') }}">
                                     Invoices
                                 </a>
                             </li>
@@ -114,8 +117,9 @@
                                 <a class="dropdown-item" href="{{ route('account.index') }}">
                                     Account
                                 </a>
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                                 document.getElementById('logout-form').submit();">
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                                                                 document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
 
@@ -298,8 +302,8 @@
                         </h3>
 
                         <p class="t-center m-b-22 size3 m-l-r-auto">
-                            Donec quis lorem nulla. Nunc eu odio mi. Morbi nec lobortis est. Sed fringilla, nunc sed
-                            imperdiet lacinia, nisl ante egestas mi, ac facilisis ligula sem id neque.
+                            We are a shop that sells a variety of frozen food (Makanan beku) and also a variety of
+                            cakes.
                         </p>
 
                     </div>
@@ -339,34 +343,43 @@
                     </h3>
                 </div>
                 <div class="row">
-                    <div class="col-md-4 p-t-30">
-                        <!-- Block1 -->
-                        <div class="blo1">
-                            <div class="wrap-pic-blo1 bo-rad-10 hov-img-zoom">
-                                <a href="#"><img src="{{ asset('landing-page/images/intro-01.jpg') }}"
-                                        alt="IMG-INTRO"></a>
-                            </div>
+                    @foreach ($ourMenu as $menu)
+                        @php
+                            if (Storage::disk('local')->exists('public/productImages/' . $menu->images[0]->image)) {
+                                $image = asset('/storage/productImages/' . $menu->images[0]->image);
+                            } else {
+                                $image = asset('/images/image-not-found.png');
+                            }
+                        @endphp
+                        <div class="col-md-4 p-t-30">
+                            <!-- Block1 -->
+                            <div class="blo1">
+                                <div class="wrap-pic-blo1 bo-rad-10 hov-img-zoom">
+                                    <a href="{{ route('products.show', $menu->id) }}"><img src="{{ $image }}"
+                                            alt="IMG-INTRO"></a>
+                                </div>
 
-                            <div class="wrap-text-blo1 p-t-35">
-                                <a href="#">
-                                    <h4 class="txt5 color0-hov trans-0-4 m-b-13">
-                                        Romantic Restaurant
-                                    </h4>
-                                </a>
+                                <div class="wrap-text-blo1 p-t-35">
+                                    <a href="{{ route('products.show', $menu->id) }}">
+                                        <h4 class="txt5 color0-hov trans-0-4 m-b-13">
+                                            {{ $menu->name }}
+                                        </h4>
+                                    </a>
 
-                                <p class="m-b-20">
-                                    Phasellus lorem enim, luctus ut velit eget, con-vallis egestas eros.
-                                </p>
+                                    <p class="m-b-20">
+                                        {{ $menu->description }}
+                                    </p>
 
-                                <a href="#" class="txt4">
-                                    Lets Order Now
-                                    <i class="fa fa-long-arrow-right m-l-10" aria-hidden="true"></i>
-                                </a>
+                                    <a href="{{ route('products.show', $menu->id) }}" class="txt4">
+                                        Lets Order Now
+                                        <i class="fa fa-long-arrow-right m-l-10" aria-hidden="true"></i>
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @endforeach
 
-                    <div class="col-md-4 p-t-30">
+                    {{-- <div class="col-md-4 p-t-30">
                         <!-- Block1 -->
                         <div class="blo1">
                             <div class="wrap-pic-blo1 bo-rad-10 hov-img-zoom">
@@ -418,7 +431,7 @@
                                 </a>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
 
                 </div>
             </div>
@@ -451,7 +464,7 @@
                             <div class="blo2 flex-w flex-str flex-col-c-m-lg animated visible-false"
                                 data-appear="zoomIn">
                                 <!-- Pic block2 -->
-                                <a href="#" class="wrap-pic-blo2 bg1-blo2"
+                                <a href="{{ route('products.public.index') }}" class="wrap-pic-blo2 bg1-blo2"
                                     style="background-image: url('{{ asset('landing-page/images/event-02.jpg') }}');">
 
                                 </a>
@@ -534,77 +547,21 @@
 
                     <!-- Gallery footer -->
                     <div class="wrap-gallery-footer flex-w">
-                        <a class="item-gallery-footer wrap-pic-w"
-                            href="{{ asset('landing-page/images/photo-gallery-01.jpg') }}"
-                            data-lightbox="gallery-footer">
-                            <img src="{{ asset('landing-page/images/photo-gallery-thumb-01.jpg') }}" alt="GALLERY">
-                        </a>
-
-                        <a class="item-gallery-footer wrap-pic-w"
-                            href="{{ asset('landing-page/images/photo-gallery-02.jpg') }}"
-                            data-lightbox="gallery-footer">
-                            <img src="{{ asset('landing-page/images/photo-gallery-thumb-02.jpg') }}" alt="GALLERY">
-                        </a>
-
-                        <a class="item-gallery-footer wrap-pic-w"
-                            href="{{ asset('landing-page/images/photo-gallery-03.jpg') }}"
-                            data-lightbox="gallery-footer">
-                            <img src="{{ asset('landing-page/images/photo-gallery-thumb-03.jpg') }}" alt="GALLERY">
-                        </a>
-
-                        <a class="item-gallery-footer wrap-pic-w"
-                            href="{{ asset('landing-page/images/photo-gallery-04.jpg') }}"
-                            data-lightbox="gallery-footer">
-                            <img src="{{ asset('landing-page/images/photo-gallery-thumb-04.jpg') }}" alt="GALLERY">
-                        </a>
-
-                        <a class="item-gallery-footer wrap-pic-w"
-                            href="{{ asset('landing-page/images/photo-gallery-05.jpg') }}"
-                            data-lightbox="gallery-footer">
-                            <img src="{{ asset('landing-page/images/photo-gallery-thumb-05.jpg') }}" alt="GALLERY">
-                        </a>
-
-                        <a class="item-gallery-footer wrap-pic-w"
-                            href="{{ asset('landing-page/images/photo-gallery-06.jpg') }}"
-                            data-lightbox="gallery-footer">
-                            <img src="{{ asset('landing-page/images/photo-gallery-thumb-06.jpg') }}" alt="GALLERY">
-                        </a>
-
-                        <a class="item-gallery-footer wrap-pic-w"
-                            href="{{ asset('landing-page/images/photo-gallery-07.jpg') }}"
-                            data-lightbox="gallery-footer">
-                            <img src="{{ asset('landing-page/images/photo-gallery-thumb-07.jpg') }}" alt="GALLERY">
-                        </a>
-
-                        <a class="item-gallery-footer wrap-pic-w"
-                            href="{{ asset('landing-page/images/photo-gallery-08.jpg') }}"
-                            data-lightbox="gallery-footer">
-                            <img src="{{ asset('landing-page/images/photo-gallery-thumb-08.jpg') }}" alt="GALLERY">
-                        </a>
-
-                        <a class="item-gallery-footer wrap-pic-w"
-                            href="{{ asset('landing-page/images/photo-gallery-09.jpg') }}"
-                            data-lightbox="gallery-footer">
-                            <img src="{{ asset('landing-page/images/photo-gallery-thumb-09.jpg') }}" alt="GALLERY">
-                        </a>
-
-                        <a class="item-gallery-footer wrap-pic-w"
-                            href="{{ asset('landing-page/images/photo-gallery-10.jpg') }}"
-                            data-lightbox="gallery-footer">
-                            <img src="{{ asset('landing-page/images/photo-gallery-thumb-10.jpg') }}" alt="GALLERY">
-                        </a>
-
-                        <a class="item-gallery-footer wrap-pic-w"
-                            href="{{ asset('landing-page/images/photo-gallery-11.jpg') }}"
-                            data-lightbox="gallery-footer">
-                            <img src="{{ asset('landing-page/images/photo-gallery-thumb-11.jpg') }}" alt="GALLERY">
-                        </a>
-
-                        <a class="item-gallery-footer wrap-pic-w"
-                            href="{{ asset('landing-page/images/photo-gallery-12.jpg') }}"
-                            data-lightbox="gallery-footer">
-                            <img src="{{ asset('landing-page/images/photo-gallery-thumb-12.jpg') }}" alt="GALLERY">
-                        </a>
+                        @foreach ($ourMenuBottom as $menu)
+                            @php
+                                if (Storage::disk('local')->exists('public/productImages/' . $menu->images[0]->image)) {
+                                    $image = asset('/storage/productImages/' . $menu->images[0]->image);
+                                } else {
+                                    $image = asset('/images/image-not-found.png');
+                                }
+                            @endphp
+                            <a class="item-gallery-footer wrap-pic-w"
+                                href="{{ route('products.show', $menu->id) }}"
+                                data-lightbox="gallery-footer">
+                                <img src="{{ $image }}"
+                                    alt="GALLERY">
+                            </a>
+                        @endforeach
                     </div>
 
                 </div>
@@ -631,7 +588,8 @@
             <div class="close-mo-video-01 trans-0-4" data-dismiss="modal" aria-label="Close">&times;</div>
 
             <div class="wrap-video-mo-01">
-                <div class="w-full wrap-pic-w op-0-0"><img src="{{ asset('landing-page/images/icons/video-16-9.jpg') }}" alt="IMG"></div>
+                <div class="w-full wrap-pic-w op-0-0"><img
+                        src="{{ asset('landing-page/images/icons/video-16-9.jpg') }}" alt="IMG"></div>
                 <div class="video-mo-01">
                     <iframe src="https://www.youtube.com/embed/5k1hSu2gdKE?rel=0&amp;showinfo=0"
                         allowfullscreen></iframe>

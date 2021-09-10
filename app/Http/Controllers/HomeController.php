@@ -34,6 +34,6 @@ class HomeController extends Controller
         $ourMenu = Product::limit(3)->get();
         $ourMenuBottom = Product::limit(12)->get();
 
-        return view('landingpage');
+        return view('landingpage', compact('ourMenu', 'ourMenuBottom'));
     }
 }
