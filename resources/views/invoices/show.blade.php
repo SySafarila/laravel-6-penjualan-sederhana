@@ -30,6 +30,10 @@
                             <span>Total</span>
                             <span class="font-weight-bold">Rp{{ number_format($invoice->total, 0, 0, ',') }}</span>
                         </div>
+                        <div class="d-flex justify-content-between">
+                            <span>Bank</span>
+                            <span class="font-weight-bold">BCA - 8691512541</span>
+                        </div>
                         <span class="font-weight-bold">Products :</span>
                         @foreach ($invoice->invoiceProducts as $product)
                             <div class="d-flex flex-column p-3 rounded-lg border my-1">
